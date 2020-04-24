@@ -1,0 +1,55 @@
+.check-box .box {
+    -fx-background-color: white;
+    -fx-border-color: #ffcdce;
+    -fx-border-radius: 0px;
+}
+
+.check-box {
+    -fx-text-fill: #3d0505;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: white;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #28a3f4;
+}
+
+.button {
+    -fx-background-color: #28a3f4;
+    -fx-text-fill: #ffffff;
+}
+
+.button:hover {
+    -fx-background-color: #1d7bb6;
+}
+
+.separator *.line {
+    -fx-border-color: #ffdcdd;
+}
+
+.text-field {
+    -fx-border-color: #ffcdce;
+}
+
+.text-area {
+    -fx-border-color: #ffcdce;
+}
+
+.label {
+    -fx-text-fill: #3d0505;
+}
+
+.btnRed {
+    -fx-background-color:  #a60e0e;
+    -fx-text-fill: #ffffff;
+}
+
+.btnRed:hover {
+    -fx-background-color: #8a0b0b;
+}
+
+.btnRed:pressed {
+    -fx-border-color: #8a0b0b;
+}

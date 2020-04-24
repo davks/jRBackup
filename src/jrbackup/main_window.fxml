@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="1273.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jrbackup.MainWindowController">
+   <children>
+      <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="554.0" prefWidth="234.0" spacing="15.0" style="-fx-background-color: #b41010;">
+               <children>
+                  <Pane prefHeight="138.0" prefWidth="234.0" style="-fx-background-color: #7c0b0b;">
+                     <children>
+                        <Label layoutX="87.0" layoutY="39.0" style="-fx-text-fill: #ffffff;" text="jRBackup" />
+                        <ComboBox fx:id="cbxVybratProjekt" editable="true" layoutX="16.0" layoutY="96.0" maxWidth="1.7976931348623157E308" onAction="#onVybratProjekt" prefHeight="28.0" prefWidth="202.0" style="-fx-background-color: #7c0b0b;" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="6.0" prefWidth="234.0" />
+                  <Button fx:id="btnUlozitProjekt" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#onUlozitProjekt" prefHeight="42.0" prefWidth="170.0" styleClass="btnRed" text="Uložit projekt" textFill="WHITE">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-save" iconSize="24" textAlignment="CENTER" wrappingWidth="20.0" />
+                     </graphic>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></Button>
+                  <Button fx:id="btnOdstranitProjekt" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#onOdstranitProjekt" prefHeight="42.0" prefWidth="170.0" styleClass="btnRed" text="Odstranit projekt" textFill="WHITE">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-window-close-o" iconSize="24" textAlignment="CENTER" wrappingWidth="20.0" />
+                     </graphic></Button>
+                  <Button fx:id="btnZobrazitPrikaz" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#onZobrazitPrikaz" prefHeight="42.0" prefWidth="170.0" styleClass="btnRed" text="Zobrazit příkaz" textFill="WHITE">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-info" iconSize="24" textAlignment="CENTER" wrappingWidth="20.0" />
+                     </graphic></Button>
+                  <Button fx:id="btnOtestovatPrikaz" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#onOtestovatPrikaz" prefHeight="42.0" prefWidth="170.0" styleClass="btnRed" text="Otestovat příkaz" textFill="WHITE">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-angle-double-right" iconSize="24" textAlignment="CENTER" wrappingWidth="20.0" />
+                     </graphic></Button>
+                  <Button fx:id="btnSpustitPrikaz" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#onSpustitPrikaz" prefHeight="42.0" prefWidth="170.0" styleClass="btnRed" text="Provést zálohu" textFill="WHITE">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-angle-right" iconSize="24" textAlignment="CENTER" wrappingWidth="20.0" />
+                     </graphic></Button>
+                  <Pane prefHeight="21.0" prefWidth="234.0" VBox.vgrow="ALWAYS" />
+                  <CheckBox fx:id="chbKonsole" mnemonicParsing="false" onAction="#onZmenitVystup" style="-fx-text-fill: #700001;" text="Použít konzoli" />
+                  <HBox prefHeight="13.0" prefWidth="234.0">
+                     <children>
+                        <Label fx:id="lblZprava" prefHeight="34.0" prefWidth="198.0" style="-fx-text-fill: #ffffff;" />
+                        <Button graphicTextGap="0.0" mnemonicParsing="false" onAction="#onOProgramu" prefHeight="50.0" prefWidth="40.0" style="-fx-background-radius: 50%; -fx-background-color: #62aa61;">
+                           <graphic>
+                              <FontIcon iconColor="#495e31db" iconLiteral="fa-question-circle-o" iconSize="24" />
+                           </graphic></Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="536.0" prefWidth="507.0" spacing="5.0" style="-fx-background-color: #ffe7e8;">
+               <children>
+                  <GridPane hgap="5.0" vgap="5.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="NEVER" />
+                      <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Zdroj:" />
+                        <Label text="Cíl:" GridPane.rowIndex="1" />
+                        <TextField fx:id="tfSource" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
+                        <TextField fx:id="tfTarget" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button fx:id="btnZdroj" mnemonicParsing="false" onAction="#onVybratZdroj" text="Otevřít" GridPane.columnIndex="2" />
+                        <Button fx:id="btnCil" mnemonicParsing="false" onAction="#onVybratCil" text="Otevřít" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+                  <Separator prefWidth="200.0" />
+                  <TabPane prefHeight="248.0" prefWidth="409.0" stylesheets="@css/tabpane.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                    <tabs>
+                      <Tab text="Základní volby">
+                        <content>
+                              <VBox spacing="5.0">
+                                 <children>
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <CheckBox fx:id="chbSSH" mnemonicParsing="false" onAction="#onNastavitSsh" text="SSH (bude vyžadováno heslo)" />
+                                          <CheckBox fx:id="chbStats" mnemonicParsing="false" text="Zobrazí užitečné informace" GridPane.rowIndex="1" />
+                                          <HBox GridPane.columnIndex="1">
+                                             <children>
+                                                <Label text="SSH port:">
+                                                   <HBox.margin>
+                                                      <Insets right="20.0" top="7.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <Pane prefHeight="30.0" prefWidth="43.0" HBox.hgrow="ALWAYS" />
+                                                <TextField fx:id="tfSshPort" disable="true" prefHeight="28.0" prefWidth="93.0">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" right="10.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </GridPane>
+                                    <Separator prefWidth="200.0" />
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <CheckBox fx:id="chbArchive" mnemonicParsing="false" onAction="#onArchivacniMod" text="Archivační mod" />
+                                          <CheckBox fx:id="chbNoPerms" mnemonicParsing="false" text="Nenastavuje oprávnění" GridPane.columnIndex="1" />
+                                          <CheckBox fx:id="chbNoOwner" mnemonicParsing="false" text="Nenastavuje vlastníka" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <CheckBox fx:id="chbNoTimes" mnemonicParsing="false" text="Nenastavuje čas" GridPane.rowIndex="1" />
+                                          <CheckBox fx:id="chbNoGroups" mnemonicParsing="false" text="Nenastavuje skupinu" GridPane.rowIndex="2" />
+                                          <CheckBox fx:id="chbOmitDirTimes" mnemonicParsing="false" text="Vynechá adresář z --times" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                       </children>
+                                    </GridPane>
+                                    <Separator prefWidth="200.0" />
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <CheckBox fx:id="chbRecursive" mnemonicParsing="false" onAction="#onRekurze" text="Rekurzivní procházení adresářů" />
+                                          <CheckBox fx:id="chbLinks" mnemonicParsing="false" text="Kopírovat symbolické odkazy" GridPane.columnIndex="1" />
+                                          <CheckBox fx:id="chbPerms" mnemonicParsing="false" text="Zachovat přístupová práva" GridPane.rowIndex="1" />
+                                          <CheckBox fx:id="chbTimes" mnemonicParsing="false" text="Zachovat čas" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <CheckBox fx:id="chbGroup" mnemonicParsing="false" text="Zachovat skupinu" GridPane.rowIndex="2" />
+                                          <CheckBox fx:id="chbOwner" mnemonicParsing="false" text="Zachovat vlastníka" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                       </children>
+                                    </GridPane>
+                                    <Separator prefWidth="200.0" />
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <CheckBox fx:id="chbD" mnemonicParsing="false" text="Povolit kopírování speciálních souborů" />
+                                          <CheckBox fx:id="chbE" mnemonicParsing="false" text="Zachování spustitelného souboru" GridPane.columnIndex="1" />
+                                          <CheckBox fx:id="chbAcls" mnemonicParsing="false" text="Zachová ACL" GridPane.rowIndex="1" />
+                                          <CheckBox fx:id="chbXattrs" mnemonicParsing="false" text="Zachová rozšířené atributy" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                        </content>
+                      </Tab>
+                        <Tab text="Rozšířené volby">
+                           <content>
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                                 <children>
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <CheckBox fx:id="chbCompress" mnemonicParsing="false" text="Komprimace při přenosu" />
+                                          <CheckBox fx:id="chbDelete" mnemonicParsing="false" text="Odstranit v cíly" GridPane.columnIndex="1" />
+                                          <CheckBox fx:id="chbHardLinks" mnemonicParsing="false" text="Kopírovat pevné odkazy" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <CheckBox fx:id="chbCopyLinks" mnemonicParsing="false" text="Přetvořit symbolické odkazy" GridPane.rowIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                    <Separator prefWidth="200.0" />
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <CheckBox fx:id="chbIgnoreExisting" mnemonicParsing="false" text="Ignorovat existující soubory" />
+                                          <CheckBox fx:id="chbExisting" mnemonicParsing="false" text="Aktualizovat pouze existující" GridPane.columnIndex="1" />
+                                          <CheckBox fx:id="chbUpdate" mnemonicParsing="false" text="Novejší přeskakovat" GridPane.rowIndex="1" />
+                                          <CheckBox fx:id="chbP" mnemonicParsing="false" text="Zachovat částečně přenesené" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <CheckBox fx:id="chbSizeOnly" mnemonicParsing="false" text="Kontrolovat jen velikost" GridPane.rowIndex="2" />
+                                          <CheckBox fx:id="chbChecksum" mnemonicParsing="false" text="Vždy porovnávat kontr. součty" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <CheckBox fx:id="chbNumericIds" mnemonicParsing="false" text="Zachovat hodnoty UIG, GID" GridPane.rowIndex="3" />
+                                          <CheckBox fx:id="chbX" mnemonicParsing="false" text="Nepřepisovat hranice" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <CheckBox fx:id="chbProgress" mnemonicParsing="false" text="Zobrazovat informace o průběhu" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <CheckBox fx:id="chbPruneEmptyDirs" mnemonicParsing="false" text="Vyřadit prázdné adresáře" GridPane.rowIndex="4" />
+                                       </children>
+                                    </GridPane>
+                                    <Separator prefWidth="200.0" />
+                                    <Label text="Vlastní parametry rsync (oddělené mezerou):" />
+                                    <TextField fx:id="tfCustomParameters" />
+                                    <Separator prefWidth="200.0" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                        </Tab>
+                      <Tab text="Zahrnout / Vyjmout">
+                        <content>
+                              <VBox spacing="5.0">
+                                 <children>
+                                    <TabPane prefHeight="200.0" prefWidth="200.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                                      <tabs>
+                                          <Tab fx:id="taFilter" text="Filtrovat">
+                                            <content>
+                                                <VBox spacing="5.0">
+                                                   <padding>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </padding>
+                                                   <children>
+                                                      <Label prefHeight="37.0" prefWidth="500.0" text="Filtrovat soubory a dresáře, které se budou synchronizovat. Každý záznam vložte na samostatný řádek." wrapText="true" />
+                                                      <TextArea fx:id="taFilterFile" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                                                      <HBox prefHeight="10.0" prefWidth="467.0">
+                                                         <children>
+                                                            <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                                            <Button mnemonicParsing="false" onAction="#onUlozitFilter" text="Uložit" />
+                                                         </children>
+                                                      </HBox>
+                                                      <TextArea editable="false" prefHeight="132.0" prefWidth="467.0" text="# Příklad:&#10;+ adresář/   # zahrnout adresář&#10;- adresar2/  # vyjmout adresar2&#10;+ */             # zahrnout ostatní podadresáře&#10;+ *.pdf        # zahrnout pdf soubory&#10;- *.txt          # nezahrnovat txt soubory&#10;- *               # nezahrnovat nic víc" wrapText="true" />
+                                                   </children>
+                                                </VBox>
+                                            </content>
+                                          </Tab>
+                                        <Tab text="Zahrnout">
+                                          <content>
+                                                <VBox spacing="5.0">
+                                                   <padding>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </padding>
+                                                   <children>
+                                                      <Label prefHeight="37.0" prefWidth="500.0" text="Zapište názvy souborů a adresářů, které chcete zahrnout. Každý soubor, či adresář vložte na samostatný řádek." wrapText="true" />
+                                                      <TextArea fx:id="taIncludeFile" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                                                   </children>
+                                                </VBox>
+                                          </content>
+                                        </Tab>
+                                        <Tab text="Vyjmout">
+                                          <content>
+                                                <VBox spacing="5.0">
+                                                   <children>
+                                                      <Label prefHeight="37.0" prefWidth="500.0" text="Zapište názvy souborů a adresářů, které chcete vynechat. Každý soubor, či adresář vložte na samostatný řádek." wrapText="true" />
+                                                      <TextArea fx:id="taExcludeFile" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </padding>
+                                                </VBox>
+                                          </content>
+                                        </Tab>
+                                      </tabs>
+                                    </TabPane>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                        </content>
+                      </Tab>
+                        <Tab text="Detail projektu">
+                          <content>
+                              <VBox spacing="5.0">
+                                 <children>
+                                    <Label text="Poznačte si detailu o projektu:">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextArea fx:id="taDescription" prefHeight="200.0" prefWidth="200.0" wrapText="true" VBox.vgrow="ALWAYS" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                          </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <TabPane fx:id="tpVystupy" prefHeight="200.0" prefWidth="200.0" side="BOTTOM" stylesheets="@css/tabpane2.css" tabClosingPolicy="UNAVAILABLE" HBox.hgrow="ALWAYS">
+              <tabs>
+                <Tab text="Výstup">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ListView fx:id="lvVystup" layoutX="14.0" layoutY="42.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab text="Přidáno">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ListView fx:id="lvPridano" layoutX="29.0" layoutY="30.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                <Tab text="Smazáno">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ListView fx:id="lvSmazano" layoutX="37.0" layoutY="44.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab text="Chyby">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ListView fx:id="lvChyby" layoutX="14.0" layoutY="21.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+              </tabs>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </TabPane>
+         </children>
+      </HBox>
+   </children>
+</VBox>

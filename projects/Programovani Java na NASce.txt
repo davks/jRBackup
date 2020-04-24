@@ -1,0 +1,10 @@
+exclude=@eaDir
+source="/home/david/Programovani/Java/"
+target="david@192.168.1.210::Programovani/Java/"
+ssh
+-a
+--stats
+--compress
+--delete
+--progress
+

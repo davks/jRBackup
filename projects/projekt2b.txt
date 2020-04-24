@@ -1,0 +1,8 @@
+source="/home/david/Zpracovat/"
+target="/home/david/Zpracovat/TEST 02/"
+-a
+--stats
+-E
+--delete
+--progress
+

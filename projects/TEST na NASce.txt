@@ -1,0 +1,14 @@
+description=TEST na NASce
+parameters=-F
+exclude=vyjmout	vyjmout2
+include=zahrnout	zahrnout2
+source="/home/david/Zpracovat/TEST01/"
+target="david@192.168.1.210::TEST01/"
+ssh
+-a
+--stats
+--compress
+--delete
+--progress
+--prune-empty-dirs
+

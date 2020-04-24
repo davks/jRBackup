@@ -1,0 +1,11 @@
+description=Provádí zálohu Projektů. Neprovádí synchronizaci, ale opravdu jen zálohu.
+exclude=@eaDir	dist	build	out	#recycle
+sshport=2225
+source="/home/david/Programovani/Projekty/"
+target="david@192.168.1.210::Programovani/Projekty/"
+ssh
+-a
+--stats
+--compress
+--progress
+
