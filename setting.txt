@@ -1,0 +1,1 @@
+konsole=xterm -hold -e

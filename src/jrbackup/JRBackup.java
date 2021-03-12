@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 public class JRBackup extends Application {
     
-    private static final String VERSION = "1.5.5";
+    private static final String VERSION = "1.6.0";
 
     @Override
     public void start(Stage primaryStage) throws Exception{

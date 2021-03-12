@@ -78,6 +78,9 @@ public class MainWindowController implements Initializable {
     private CheckBox chbSSH;
 
     @FXML
+    private CheckBox chbSshpass;
+
+    @FXML
     private CheckBox chbStats;
 
     @FXML
@@ -226,7 +229,7 @@ public class MainWindowController implements Initializable {
 
         nastavitPrepinace();
         nastavitTooltip();
-        ziskatSeznamProjektu();
+        ziskatSeznamProjektu(false);
     }
 
     public void setVersion(String version) {
@@ -258,6 +261,9 @@ public class MainWindowController implements Initializable {
                 
                 String sshString = volby.get(Projekt.SSH_PORT) == null ? "" : (String) volby.get(Projekt.SSH_PORT);
                 tfSshPort.setText(sshString);
+
+                boolean sshpass = volby.get(Projekt.SSH_PASS) != null;
+                chbSshpass.setSelected(sshpass);
 
                 // Ziskame seznam zvolenych prepinacu, ktery projdeme a v okne nastavime prislusny checkbox jako selected
                 List<String> seznamZvolenychPrepinacu = (List<String>) volby.get(Projekt.SEZNAM_PREPINACU);
@@ -299,6 +305,7 @@ public class MainWindowController implements Initializable {
             String source = tfSource.getText();
             String target = tfTarget.getText();
             String filter = taFilterFile.getText();
+            boolean sshpass = chbSshpass.isSelected();
 
             int sshport = -1;
             if (tfSshPort.getText().length() > 0) {
@@ -317,9 +324,12 @@ public class MainWindowController implements Initializable {
             });
 
             try {
-                projekt.ulozitProjekt(novyNazev, detail, customParameter, sshport, exclude, include, source, target, p);
-                ziskatSeznamProjektu();
+                projekt.setNazevProjektu(novyNazev);
+                projekt.ulozitProjekt(detail, customParameter, sshport, sshpass, exclude, include, source, target, p);
                 projekt.ulozitSouborFilter(source, filter);
+                ziskatSeznamProjektu(false);
+                cbxVybratProjekt.getSelectionModel().select(novyNazev);
+
                 lblZprava.setText("Projekt uložen");
 
             } catch (IOException ex) {
@@ -371,9 +381,11 @@ public class MainWindowController implements Initializable {
     @FXML
     void onZobrazitPrikaz(ActionEvent event) {
         List<String> param = sestrojitPrikaz();
-        if (chbSSH.isSelected()) {
+        if (chbSSH.isSelected() && chbSshpass.isSelected()) {
             param.add(2, "<password>");
             param.set(5, "\"" + param.get(5) + "\"");
+        } else {
+            param.set(2, "\"" + param.get(2) + "\"");
         }
 
         try {
@@ -572,7 +584,7 @@ public class MainWindowController implements Initializable {
         List<String> param = sestrojitPrikaz();
         String heslo = "";
 
-        if (chbSSH.isSelected()) {
+        if (chbSSH.isSelected() && chbSshpass.isSelected()) {
             heslo = AlertBox.displayPassword("Zadat heslo", "Zadejte heslo", event);
             param.add(2, heslo);
         }
@@ -601,7 +613,7 @@ public class MainWindowController implements Initializable {
      */
     private List<String> sestrojitPrikaz() {
         List<String> parametry = new ArrayList<>();
-        if (chbSSH.isSelected()) {
+        if (chbSSH.isSelected() && chbSshpass.isSelected()) {
             parametry.add("sshpass");
             parametry.add("-p");
         }
@@ -672,7 +684,6 @@ public class MainWindowController implements Initializable {
                 final BufferedReader error = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
                 String line;
-
                 try {
                     while ((line = reader.readLine()) != null) {
 
@@ -768,14 +779,6 @@ public class MainWindowController implements Initializable {
     }
 
     /**
-     * Najde se seznam souborů a vloží do comboboxu. Automaticky se vybere
-     * vybrany projekt.
-     */
-    private void ziskatSeznamProjektu() {
-        ziskatSeznamProjektu(false);
-    }
-
-    /**
      * Ziskame seznam projektu a vlozime jej do comboboxu. Vybereme v combobxu
      * bud aktualni projekt, nebo nastavime prazdny
      *
@@ -799,6 +802,7 @@ public class MainWindowController implements Initializable {
         btnOtestovatPrikaz.setTooltip(new Tooltip("Pouze otestuje úlohu.\nNic se neprovede"));
         btnUlozitProjekt.setTooltip(new Tooltip("Uloží aktuální projekt"));
         btnOdstranitProjekt.setTooltip(new Tooltip("Odstraní projekt"));
+        chbSshpass.setTooltip(new Tooltip("Použije program sshpas, který musí být nainstalovaný"));
 
         seznamVsechPrepinacu.forEach((chb, parametr) -> chb.setTooltip(new Tooltip(parametr.getTooltip())));
     }
@@ -878,9 +882,12 @@ public class MainWindowController implements Initializable {
     
     private void prepnoutSSH(String ssh) {
         if (chbSSH.isSelected()) {
+            chbSshpass.setDisable(false);
             tfSshPort.setDisable(false);
             tfSshPort.setText(ssh);
         } else {
+            chbSshpass.setDisable(true);
+            chbSshpass.setSelected(false);
             tfSshPort.setDisable(true);
             tfSshPort.setText("");
         }
@@ -892,7 +899,7 @@ public class MainWindowController implements Initializable {
      */
     private void nastavitPrepinace() {
         // zakladni
-        seznamVsechPrepinacu.put(chbSSH, new ParametrPrikazu(Projekt.PARAMETER_SSH, "-e SSH - Použije SSH (sshpass). Umožní pracovat se vzdáleným úložistěm"));
+        seznamVsechPrepinacu.put(chbSSH, new ParametrPrikazu(Projekt.PARAMETER_SSH, "-e SSH - Umožní pracovat se vzdáleným úložistěm"));
 
         seznamVsechPrepinacu.put(chbRecursive, new ParametrPrikazu(Projekt.PARAMETER_R, "-r, --recursive - Rekurzivní procházení adresáře"));
         seznamVsechPrepinacu.put(chbLinks, new ParametrPrikazu(Projekt.PARAMETER_L, "-l, --links - kopíruje symbolické odkazyy, pokud to cíl dovolí"));

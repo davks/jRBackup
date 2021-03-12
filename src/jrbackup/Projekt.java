@@ -36,6 +36,7 @@ public class Projekt {
     public static final String INCLUDE = "include";
     public static final String SSH_PORT = "sshport";
     public static final String SEZNAM_PREPINACU = "prepinace";
+    public static final String SSH_PASS = "sshpass";
 
     // parametry rsync, ktere je mozne v programu pouzit
     public static final String PARAMETER_SSH = "ssh";
@@ -95,7 +96,7 @@ public class Projekt {
      */
     public void setNazevProjektu(String nazevProjektu) {
         this.nazevProjektu = nazevProjektu;
-        if (nazevProjektu.endsWith(koncovkaSouboru)) {
+        if (nazevProjektu != null && nazevProjektu.endsWith(koncovkaSouboru)) {
             this.nazevProjektu = nazevProjektu.replace(koncovkaSouboru, "");
         }
         cestaKSouboru = adresarProjektu + "/" + this.nazevProjektu + koncovkaSouboru;
@@ -179,6 +180,8 @@ public class Projekt {
                     volby.put(TARGET, radek.replace("target=", "").replace("\"", ""));
                 } else if (radek.startsWith("sshport=")) {
                     volby.put(SSH_PORT, radek.replace("sshport=", ""));
+                } else if (radek.startsWith("sshpass")) {
+                    volby.put(SSH_PASS, "sshpass");
                 } else {
                     seznamPrepinacu.add(radek);
                 }
@@ -186,73 +189,6 @@ public class Projekt {
             volby.put(SEZNAM_PREPINACU, seznamPrepinacu);
         }
         return volby;
-    }
-
-    /**
-     * Ulozime projekt pro program rsync jako obycejny textoveho souboru.
-     *
-     * @param description poznamka projektu
-     * @param parameters vlastni, uzivatelem zadane parametry k rsync
-     * @param sshport cislo portu ssh
-     * @param exclude soubory a adresare, ktere se nebudou synchronizovat
-     * @param include soubory a dresare, ktere se budou synchronizovat
-     * @param source zdroj synchronizace
-     * @param target cil synchronizace
-     * @param rsyncVolby prepinace programu rsync
-     * @throws IOException
-     */
-    public void ulozitProjekt(String description, String parameters, int sshport,
-            String exclude, String include, String source, String target, List<String> rsyncVolby) throws IOException {
-
-        StringBuilder prikaz = new StringBuilder();
-        if (!description.trim().equals("")) {
-            prikaz.append("description=").append(description.trim().replace("\n", "**")).append("\n");
-        }
-        if (!parameters.trim().equals("")) {
-            prikaz.append("parameters=").append(parameters.trim()).append("\n");
-        }
-        if (!exclude.trim().equals("")) {
-            prikaz.append("exclude=").append(exclude.trim().replace("\n", "\t")).append("\n");
-        }
-        if (!include.trim().equals("")) {
-            prikaz.append("include=").append(include.trim().replace("\n", "\t")).append("\n");
-        }
-        if (sshport > 0) {
-            prikaz.append("sshport=").append(String.valueOf(sshport)).append("\n");
-        }
-        
-        
-        prikaz.append("source=\"").append(source.trim()).append("\"\n");
-        prikaz.append("target=\"").append(target.trim()).append("\"\n");
-
-        rsyncVolby.forEach((volba) -> {
-            prikaz.append(volba).append("\n");
-        });
-
-        try ( PrintWriter pw = new PrintWriter(new FileWriter(cestaKSouboru))) {
-            pw.write(prikaz.toString() + "\n");
-        }
-    }
-
-    /**
-     * Ulozime projekt pro program rsync jako obycejny textoveho souboru.
-     *
-     * @param description poznamka projektu
-     * @param nazevProjektu nazev projektu, ktery odstrani pripadnou koncovku
-     * @param parameters vlastni, uzivatelem zadane parametry k rsync
-     * @param sshport cislo ssh portu
-     * @param exclude soubory a adresare, ktere se nebudou synchronizovat
-     * @param include soubory a dresare, ktere se budou synchronizovat
-     * @param source zdroj synchronizace
-     * @param target cil synchronizace
-     * @param rsyncVolby prepinace programu rsync
-     * @throws IOException
-     */
-    public void ulozitProjekt(String nazevProjektu, String description, String parameters, int sshport,
-            String exclude, String include, String source, String target, List<String> rsyncVolby) throws IOException {
-
-        setNazevProjektu(nazevProjektu);
-        ulozitProjekt(description, parameters, sshport, exclude, include, source, target, rsyncVolby);
     }
 
     /**
@@ -278,7 +214,7 @@ public class Projekt {
                 pw.write(filter.trim());
             }
         }
-        
+
         /*if (f.exists() && filter.trim().equals("")) {
             f.delete();
         } else {
@@ -349,4 +285,51 @@ public class Projekt {
         return seznam;
     }
 
+    /**
+     * Ulozime projekt pro program rsync jako obycejny textoveho souboru.
+     *
+     * @param description poznamka projektu
+     * @param parameters vlastni, uzivatelem zadane parametry k rsync
+     * @param sshport cislo portu ssh
+     * @param exclude soubory a adresare, ktere se nebudou synchronizovat
+     * @param include soubory a dresare, ktere se budou synchronizovat
+     * @param source zdroj synchronizace
+     * @param target cil synchronizace
+     * @param rsyncVolby prepinace programu rsync
+     * @throws IOException
+     */
+    public void ulozitProjekt(String description, String parameters, int sshport, boolean sshpass,
+                               String exclude, String include, String source, String target, List<String> rsyncVolby) throws IOException {
+
+        StringBuilder prikaz = new StringBuilder();
+        if (!description.trim().equals("")) {
+            prikaz.append("description=").append(description.trim().replace("\n", "**")).append("\n");
+        }
+        if (sshpass) {
+            prikaz.append("sshpass").append("\n");
+        }
+        if (!parameters.trim().equals("")) {
+            prikaz.append("parameters=").append(parameters.trim()).append("\n");
+        }
+        if (!exclude.trim().equals("")) {
+            prikaz.append("exclude=").append(exclude.trim().replace("\n", "\t")).append("\n");
+        }
+        if (!include.trim().equals("")) {
+            prikaz.append("include=").append(include.trim().replace("\n", "\t")).append("\n");
+        }
+        if (sshport > 0) {
+            prikaz.append("sshport=").append(sshport).append("\n");
+        }
+
+        prikaz.append("source=\"").append(source.trim()).append("\"\n");
+        prikaz.append("target=\"").append(target.trim()).append("\"\n");
+
+        rsyncVolby.forEach((volba) -> {
+            prikaz.append(volba).append("\n");
+        });
+
+        try ( PrintWriter pw = new PrintWriter(new FileWriter(cestaKSouboru))) {
+            pw.write(prikaz.toString() + "\n");
+        }
+    }
 }

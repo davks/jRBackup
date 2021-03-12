@@ -1,0 +1,11 @@
+description=Záloha vytvořených formulářů ADK.
+sshport=2225
+source="/home/davidk/Dokumenty/DiarDKS-Filofax/"
+target="david@192.168.1.210::Dokumenty/DiarDKS-Filofax/"
+ssh
+-a
+--stats
+--compress
+--delete
+--progress
+
