@@ -1,5 +1,4 @@
 description=Záloha vytvořených formulářů ADK.
-sshpass
 sshport=2225
 source="/home/davidk/Dokumenty/DiarDKS-Filofax/"
 target="david@192.168.1.210::Dokumenty/DiarDKS-Filofax/"

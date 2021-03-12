@@ -111,7 +111,7 @@
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <CheckBox fx:id="chbSSH" mnemonicParsing="false" onAction="#onNastavitSsh" text="SSH (bude vyžadováno heslo)" />
+                                          <CheckBox fx:id="chbSSH" mnemonicParsing="false" onAction="#onNastavitSsh" text="SSH" />
                                           <CheckBox fx:id="chbStats" mnemonicParsing="false" text="Zobrazí užitečné informace" GridPane.rowIndex="2" />
                                           <HBox GridPane.columnIndex="1">
                                              <children>

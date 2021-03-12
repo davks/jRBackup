@@ -381,11 +381,13 @@ public class MainWindowController implements Initializable {
     @FXML
     void onZobrazitPrikaz(ActionEvent event) {
         List<String> param = sestrojitPrikaz();
-        if (chbSSH.isSelected() && chbSshpass.isSelected()) {
-            param.add(2, "<password>");
-            param.set(5, "\"" + param.get(5) + "\"");
-        } else {
-            param.set(2, "\"" + param.get(2) + "\"");
+        if (chbSSH.isSelected()) {
+            if (chbSshpass.isSelected()) {
+                param.add(2, "<password>");
+                param.set(5, "\"" + param.get(5) + "\"");
+            } else {
+                param.set(2, "\"" + param.get(2) + "\"");
+            }
         }
 
         try {
