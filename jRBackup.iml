@@ -7,9 +7,9 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/.idea/libraries" isTestSource="false" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="java-13-openjdk" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Ikonli" level="application" />
     <orderEntry type="library" name="JavaFX13" level="application" />
+    <orderEntry type="library" name="Ikonli 11.1" level="application" />
   </component>
 </module>

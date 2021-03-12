@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact name="jRBackup:jar">
+    <output-path>$PROJECT_DIR$/classes/artifacts/jRBackup_jar</output-path>
+    <root id="root">
+      <element id="archive" name="jRBackup.jar">
+        <element id="module-output" name="jRBackup" />
+      </element>
+      <element id="directory" name="lib">
+        <element id="library" level="application" name="JavaFX13" />
+        <element id="library" level="application" name="Ikonli 11.1" />
+      </element>
+    </root>
+  </artifact>
+</component>

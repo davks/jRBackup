@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Main-Class: jrbackup.AppRun
+Class-Path: lib/javafx-swt.jar lib/javafx.base.jar lib/javafx.controls.j
+ ar lib/javafx.fxml.jar lib/javafx.graphics.jar lib/javafx.media.jar lib
+ /javafx.swing.jar lib/javafx.web.jar lib/ikonli-core-11.1.0.jar lib/iko
+ nli-elusive-pack-11.1.0.jar lib/ikonli-fontawesome-pack-11.1.0.jar lib/
+ ikonli-fontawesome5-pack-11.1.0.jar lib/ikonli-javafx-11.1.0.jar lib/ik
+ onli-typicons-pack-11.1.0.jar lib/ikonli-websymbols-pack-11.1.0.jar
+
