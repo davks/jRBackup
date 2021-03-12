@@ -14,10 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  *
@@ -339,6 +336,7 @@ public class Projekt {
         File[] listOfFiles = folder.listFiles();
 
         if (listOfFiles != null) {
+            Arrays.sort(listOfFiles, Comparator.comparing(a -> a.getName().toLowerCase()));
             for (File file : listOfFiles) {
                 if (file.isFile() && file.getName().endsWith(koncovkaSouboru)) {
                     if (file.getName().endsWith("exclude" + koncovkaSouboru)) {
